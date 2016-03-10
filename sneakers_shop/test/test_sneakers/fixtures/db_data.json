@@ -1,0 +1,69 @@
+[
+  {
+    "model": "sneakers.brand",
+    "fields": {
+      "title": "Addidas"
+    },
+    "pk": 1
+  },
+  {
+    "model": "sneakers.brand",
+    "fields": {
+      "title": "Nike"
+    },
+    "pk": 2
+  },
+  {
+    "model": "sneakers.brand",
+    "fields": {
+      "title": "Puma"
+    },
+    "pk": 3
+  },
+  {
+    "model": "sneakers.sneaker",
+    "fields": {
+      "size": 40,
+      "description": "some sneakers",
+      "date_update": "2016-03-10T23:13:29.187Z",
+      "is_ready": true,
+      "brand": 1,
+      "model": "XL 50s",
+      "date_add": "2016-03-10T22:57:50.299Z",
+      "sex": 0
+    },
+    "pk": 1
+  },
+  {
+    "model": "sneakers.sneaker",
+    "fields": {
+      "size": 45,
+      "description": "qwewerrytuixdfdg",
+      "date_update": "2016-03-10T23:37:39.753Z",
+      "is_ready": true,
+      "brand": 2,
+      "model": "werty",
+      "date_add": "2016-03-10T22:58:25.383Z",
+      "sex": 0
+    },
+    "pk": 2
+  },
+  {
+    "model": "sneakers.sneakersphoto",
+    "fields": {
+      "sneakers": 1,
+      "image": "sneakers/4/tmp_dQisMD2hMAKC.jpg",
+      "is_ready": false
+    },
+    "pk": 2
+  },
+  {
+    "model": "sneakers.sneakersphoto",
+    "fields": {
+      "sneakers": 2,
+      "image": "sneakers/without-photo.jpg",
+      "is_ready": true
+    },
+    "pk": 3
+  }
+]

@@ -1,0 +1,4 @@
+{% for obj in object_list %}
+    {{ obj }} <br/>
+    <img src="/media/{{ obj.sneakers_photo.first.image }}" width="200">
+{% endfor %}

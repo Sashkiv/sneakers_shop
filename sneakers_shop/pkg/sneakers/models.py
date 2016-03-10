@@ -13,9 +13,12 @@ class Brand(models.Model):
 
     title = models.CharField(max_length=255, verbose_name='Назва бренду')
 
+    def __str__(self):
+        return self.title
+
 
 class Sneaker(models.Model):
-    class Model:
+    class Meta:
         db_table = 'sneakers_info'
         verbose_name = 'Кросівки'
         verbose_name_plural = 'Кросівки'
@@ -36,6 +39,11 @@ class Sneaker(models.Model):
     size = models.SmallIntegerField(verbose_name='Розмір')
     description = models.TextField(verbose_name='Опис')
     is_ready = models.BooleanField(verbose_name='Опублікувати')
+    date_add = models.DateTimeField(auto_now_add=True)
+    date_update = models.DateTimeField(auto_now=True)
+
+    def __str__(self):
+        return '{} | {}'.format(self.brand, self.model)
 
 
 class SneakersPhoto(models.Model):
@@ -57,7 +65,10 @@ class SneakersPhoto(models.Model):
         return url
 
     sneakers = models.ForeignKey(Sneaker, verbose_name='Кросівки',
-                                 related_name='sneakers_photo')
+                                 related_name='sneakers_photo', db_index=True)
     image = models.ImageField(upload_to=upload_path, default=DEFAULT_IMG,
                               verbose_name='Зображення')
     is_ready = models.BooleanField(verbose_name='Опублікувати')
+
+    def __str__(self):
+        return '{} | photo | {}'.format(self.sneakers, self.pk)

@@ -1,3 +1,4 @@
 .idea
 media/*
 *.pyc
+!media/sneakers/without-photo.jpg

@@ -1,0 +1,26 @@
+body {
+    padding-top: 70px;
+    background: #d6d6d6;
+}
+
+nav {
+    box-shadow: 0 0 10px rgba(0,0,0,0.5);
+}
+
+.navbar-brand {
+    font-family: 'Pacifico', cursive;
+}
+
+.social-btns {
+    margin-left: 85%;
+}
+
+.social-btns li {
+    display: inline;
+}
+
+#slider {
+    margin-top: 30px;
+    height: 400px;
+    box-shadow: 2px 3px 5px rgba(0,0,50,0.5);
+}

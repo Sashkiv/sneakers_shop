@@ -11,8 +11,8 @@ class SneakersListView(generic.ListView):
     def get(self, request, *args, **kwargs):
 
         form = SneakersFilterForm(request.GET)
-        if form.is_valid():
-            self.queryset = self.queryset.filter(**form.clean())
+        form.is_valid()
+        self.queryset = self.queryset.filter(**form.clean())
         return super(SneakersListView, self).get(request, *args, **kwargs)
 
 

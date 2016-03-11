@@ -8,11 +8,17 @@ class SneakersFilterForm(forms.ModelForm):
         model = Sneaker
         fields = ['brand', 'size', 'sex', ]
 
+    def __init__(self, *args, **kwargs):
+        super(SneakersFilterForm, self).__init__(*args, **kwargs)
+        self.fields['brand'].required = False
+        self.fields['size'].required = False
+        self.fields['sex'].required = False
+
     def clean(self):
         cleaned_data = super(SneakersFilterForm, self).clean()
         keys_for_remove = []
         for k, v in cleaned_data.items():
-            if not v:
+            if v is None or v == '':
                 keys_for_remove.append(k)
 
         for key in keys_for_remove:

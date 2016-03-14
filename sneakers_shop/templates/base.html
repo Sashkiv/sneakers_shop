@@ -8,18 +8,54 @@
     <meta charset="UTF-8">
     <title>{{ title }}</title>
     <link rel="stylesheet" href="{% static 'bootstrap-3.3.6/css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'bootstrap-social-gh-pages/bootstrap-social.css' %}">
+    <link rel="stylesheet" href="{% static 'bootstrap-social-gh-pages/assets/css/font-awesome.css' %}">
     <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <link href='https://fonts.googleapis.com/css?family=Pacifico' rel='stylesheet' type='text/css'>
 </head>
 <body>
 
 <div class="container">
-    <div class="header">
+    <div id="header">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="social-btns">
+                    <ul>
+                        <li><a href="http://facebook.com" class="btn btn-social-icon btn-facebook"><span class="fa fa-facebook"></span></a></li>
+                        <li><a href="http://vk.com" class="btn btn-social-icon btn-vk"><span class="fa fa-vk"></span></a></li>
+                        <li><a href="http://instagram.com" class="btn btn-social-icon btn-instagram"> <span class="fa fa-instagram"></span></a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <nav class="navbar navbar-inverse">
+            <div class="container-fluid">
+                <div class="container-fluid">
+                    <!-- Brand and toggle get grouped for better mobile display -->
+                    <div class="navbar-header">
+                        <a class="navbar-brand" href="/">Sport People</a>
+                    </div>
+                    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                        <ul class="nav navbar-nav">
+                            <li {% if request.path == '/' %} class="active" {% endif %}><a href="/">Головна</a></li>
+                            <li {% if request.path == '/catalog/' %} class="active" {% endif %}><a href="/catalog/">Каталог</a></li>
+                            <li {% if request.path == '/delivery/' %} class="active" {% endif %}><a href="/delivery/">Доставка</a></li>
+                            <li {% if request.path == '/about/' %} class="active" {% endif %}><a href="/about/">Про нас</a></li>
+                            <li {% if request.path == '/contacts/' %} class="active" {% endif %}><a href="/contacts/">Контакти</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </nav>
+
+    </div>
+    <div id="slider">
 
     </div>
     <div class="content">
         {% block content %}{% endblock %}
     </div>
-    <div class="footer">
+    <div id="footer">
 
     </div>
 </div>

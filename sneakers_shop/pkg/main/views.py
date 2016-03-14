@@ -36,3 +36,12 @@ class CatalogView(generic.TemplateView):
         context = super(CatalogView, self).get_context_data(**kwargs)
         context['title'] = _("Каталог. Вибери свій товар.")
         return context
+
+
+class DeliveryView(generic.TemplateView):
+    template_name = 'delivery.html'
+
+    def get_context_data(self, **kwargs):
+        context = super(DeliveryView, self).get_context_data(**kwargs)
+        context['title'] = _("Доставка")
+        return context

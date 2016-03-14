@@ -18,7 +18,7 @@ class SneakersFilterForm(forms.ModelForm):
         cleaned_data = super(SneakersFilterForm, self).clean()
         keys_for_remove = []
         for k, v in cleaned_data.items():
-            if v is None:
+            if v is None or v == '':
                 keys_for_remove.append(k)
 
         for key in keys_for_remove:

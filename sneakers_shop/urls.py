@@ -6,8 +6,8 @@ from django.contrib import admin
 
 urlpatterns = [
 
-    url(r'', include('sneakers_shop.pkg.sneakers.urls')),
     url(r'', include('sneakers_shop.pkg.main.urls')),
+    url(r'^sneakers/', include('sneakers_shop.pkg.sneakers.urls')),
     url(r'^admin/', include(admin.site.urls)),
 ]
 if settings.DEBUG:

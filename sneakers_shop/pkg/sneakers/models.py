@@ -53,7 +53,7 @@ class SneakersPhoto(models.Model):
         verbose_name = _('Зображення')
         verbose_name_plural = _('Зображення')
 
-    DEFAULT_IMG = 'sneakers/without-photo.jpg'
+    DEFAULT_IMG = 'without-photo.jpg'
 
     def upload_path(self, filename):
         name = random_string(size=12)

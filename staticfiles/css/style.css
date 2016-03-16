@@ -1,6 +1,6 @@
 body {
     padding-top: 70px;
-    background: #d6d6d6;
+    background: #dedede;
 }
 
 nav {
@@ -11,9 +11,6 @@ nav {
     font-family: 'Pacifico', cursive;
 }
 
-.social-btns {
-    margin-left: 85%;
-}
 
 .social-btns li {
     display: inline;
@@ -22,5 +19,28 @@ nav {
 #slider {
     margin-top: 30px;
     height: 400px;
-    box-shadow: 2px 3px 5px rgba(0,0,50,0.5);
+    box-shadow: 2px 3px 5px rgba(0, 0, 50, 0.5);
+}
+
+.sneakers {
+    display: inline-block;
+    margin: 10px 10px 25px 10px;
+    border: 1px solid #ccc;
+    transition-property: all;
+    transition-duration: .2s;
+    transition-timing-function: ease-in-out;
+}
+
+.sneakers:hover {
+    border: 1px solid orange;
+    box-shadow: 2px 5px 5px rgba(255,150,0,0.5);
+    cursor: pointer;
+}
+
+.sneakers a:hover {
+    text-decoration: none;
+}
+.content {
+    margin-top: 20px;
+    min-height: 300px;
 }

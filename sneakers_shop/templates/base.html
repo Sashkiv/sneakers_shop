@@ -21,7 +21,7 @@
     <div id="header">
         <div class="container-fluid">
             <div class="row">
-                <div class="social-btns">
+                <div class="social-btns col-md-offset-10">
                     <ul>
                         <li><a href="http://facebook.com" class="btn btn-social-icon btn-facebook"><span class="fa fa-facebook"></span></a></li>
                         <li><a href="http://vk.com" class="btn btn-social-icon btn-vk"><span class="fa fa-vk"></span></a></li>
@@ -30,36 +30,34 @@
                 </div>
             </div>
         </div>
-        <nav class="navbar navbar-inverse">
+    </div>
+    <nav class="navbar navbar-inverse">
+        <div class="container-fluid">
             <div class="container-fluid">
-                <div class="container-fluid">
-                    <!-- Brand and toggle get grouped for better mobile display -->
-                    <div class="navbar-header">
-                        <a class="navbar-brand" href="/">Sport People</a>
-                    </div>
-                    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                        <ul class="nav navbar-nav">
-                            <li {% if request.path == '/' %} class="active" {% endif %}><a href="/">Головна</a></li>
-                            <li {% if request.path == '/catalog/' %} class="active" {% endif %}><a href="/catalog/">Каталог</a></li>
-                            <li {% if request.path == '/delivery/' %} class="active" {% endif %}><a href="/delivery/">Доставка</a></li>
-                            <li {% if request.path == '/about/' %} class="active" {% endif %}><a href="/about/">Про нас</a></li>
-                            <li {% if request.path == '/contacts/' %} class="active" {% endif %}><a href="/contacts/">Контакти</a></li>
-                        </ul>
-                    </div>
+                <!-- Brand and toggle get grouped for better mobile display -->
+                <div class="navbar-header">
+                    <a class="navbar-brand" href="/">Sport People</a>
+                </div>
+                <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                    <ul class="nav navbar-nav">
+                        <li {% if request.path == '/' %} class="active" {% endif %}><a href="/">Головна</a></li>
+                        <li {% if request.path == '/catalog/' %} class="active" {% endif %}><a href="/catalog/">Каталог</a></li>
+                        <li {% if request.path == '/delivery/' %} class="active" {% endif %}><a href="/delivery/">Доставка</a></li>
+                        <li {% if request.path == '/about/' %} class="active" {% endif %}><a href="/about/">Про нас</a></li>
+                        <li {% if request.path == '/contacts/' %} class="active" {% endif %}><a href="/contacts/">Контакти</a></li>
+                    </ul>
                 </div>
             </div>
-        </nav>
-
-    </div>
+        </div>
+    </nav>
     <div id="slider">
 
     </div>
-    <div class="content">
-        {% block content %}{% endblock %}
-    </div>
-    <div id="footer">
-
-    </div>
+</div>
+<div class="content">
+    {% block content %}{% endblock %}
+</div>
+<div id="footer">
 </div>
 
 </body>

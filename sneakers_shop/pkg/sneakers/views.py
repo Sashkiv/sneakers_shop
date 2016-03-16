@@ -7,6 +7,12 @@ from sneakers_shop.pkg.sneakers.forms import SneakersFilterForm
 class SneakersListView(generic.ListView):
 
     queryset = Sneaker.objects.filter(is_ready=True)
+    paginate_by = 6
+
+    def get_context_data(self, **kwargs):
+        form = SneakersFilterForm(self.request.GET)
+        kwargs['form'] = form
+        return super(SneakersListView, self).get_context_data(**kwargs)
 
     def get(self, request, *args, **kwargs):
 

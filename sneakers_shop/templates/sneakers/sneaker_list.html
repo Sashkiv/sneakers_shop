@@ -1,4 +1,64 @@
-{% for obj in object_list %}
-    {{ obj }} <br/>
-    <img src="/media/{{ obj.sneakers_photo.first.image }}" width="200">
-{% endfor %}
+<form id="sneakers-filter-form" action="/sneakers/" method="get" onchange="refresh_sneakers()">
+    <a name="top"></a>
+    <div id="filters" class="col-lg-3">
+        <span id="filter-text">Виберіть фільтр</span>
+        <div id="gender-type">
+            {{ form.gender }}
+        </div>
+        <div id="brand-type">
+            {{ form.brand }}
+        </div>
+        <div id="size-sneakers">
+
+        </div>
+    </div>
+
+    <div id="sneakers-list" class="col-lg-9">
+        <div id="catalog-head" class="">
+            <h3>Каталог</h3>
+        </div>
+
+
+    {% for obj in object_list %}
+        <div class="sneakers">
+            <a href="/sneakers/{{ obj.id }}/">
+
+                <div class="sneakers-image">
+                    <img src="/media/{{ obj.sneakers_photo.first.image }}" width="300">
+                </div>
+                <div class="title">
+                    {{ obj }} <br/>
+                </div>
+                <div class="sizes">
+                    <span>Доступні розміри</span>
+                    {%  for size in obj.sneakers_size.all %}
+                        <span>{{ size.size }}   </span>
+                    {% endfor %}
+                </div>
+            </a>
+        </div>
+
+    {% endfor %}
+    </div>
+</form>
+
+<div class="col-lg-offset-6">
+{% if is_paginated %}
+    <ul class="pagination">
+    {% if page_obj.has_previous %}
+        <li>
+            <span><a href="#top" onclick="go_to_page({{ page_obj.previous_page_number }})">Previous</a></span>
+        </li>
+    {% endif %}
+        <li class="">
+            <span>Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.</span>
+        </li>
+    {% if page_obj.has_next %}
+        <li>
+            <span><a href="#top" onclick="go_to_page({{ page_obj.next_page_number }})">Next</a></span>
+        </li>
+    {% endif %}
+    </ul>
+{% endif %}
+</div>
+

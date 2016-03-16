@@ -6,13 +6,12 @@ from sneakers_shop.pkg.sneakers.models import Sneaker
 class SneakersFilterForm(forms.ModelForm):
     class Meta:
         model = Sneaker
-        fields = ['brand', 'size', 'sex', ]
+        fields = ['brand', 'gender', ]
 
     def __init__(self, *args, **kwargs):
         super(SneakersFilterForm, self).__init__(*args, **kwargs)
         self.fields['brand'].required = False
-        self.fields['size'].required = False
-        self.fields['sex'].required = False
+        self.fields['gender'].required = False
 
     def clean(self):
         cleaned_data = super(SneakersFilterForm, self).clean()

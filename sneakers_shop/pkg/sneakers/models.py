@@ -27,24 +27,71 @@ class Sneaker(models.Model):
     MALE = 0x00
     FEMALE = 0x01
 
-    SEX = (
+    GENDER = (
         (MALE, _('Чоловічі')),
         (FEMALE, _('Жіночі')),
     )
 
     brand = models.ForeignKey(Brand, verbose_name=_('Бренд'))
     model = models.CharField(max_length=255, verbose_name=_('Модель'))
-    sex = models.PositiveSmallIntegerField(
-        choices=SEX, default=MALE, db_index=True, verbose_name=_('Стать')
+    gender = models.PositiveSmallIntegerField(
+        choices=GENDER, default=MALE, db_index=True, verbose_name=_('Стать')
     )
-    size = models.SmallIntegerField(verbose_name=_('Розмір'))
-    description = models.TextField(verbose_name=_('Опис'))
+    price = models.IntegerField(default=0, verbose_name=_('Ціна'))
     is_ready = models.BooleanField(verbose_name=_('Опублікувати'))
-    date_add = models.DateTimeField(auto_now_add=True)
-    date_update = models.DateTimeField(auto_now=True)
+    date_add = models.DateTimeField(auto_now_add=True,
+                                    verbose_name=_('Дата додання'))
+    date_update = models.DateTimeField(
+        auto_now=True, verbose_name=_('Дата останнього оновлення')
+    )
 
     def __str__(self):
         return '{} | {}'.format(self.brand, self.model)
+
+
+class SneakersDescription(models.Model):
+    class Meta:
+        db_table = 'sneakers_description'
+        verbose_name = _('Опис')
+        verbose_name_plural = _('Описи')
+
+    UKRAINIAN = 'uk'
+    RUSSIAN = 'ru'
+
+    LANGUAGES = (
+        (UKRAINIAN, _('Українська')),
+        (RUSSIAN, _('Російська')),
+    )
+
+    sneakers = models.ForeignKey(
+        Sneaker,
+        related_name='sneakers_description',
+        verbose_name=_('Кросівки')
+    )
+    description = models.TextField(verbose_name=_('Опис'))
+    language = models.CharField(
+        max_length=7,
+        choices=LANGUAGES,
+        default=UKRAINIAN,
+        db_index=True,
+        verbose_name=_('Мова')
+    )
+
+    def __str__(self):
+        return '{} | Опис (мова: {})'.format(self.sneakers, self.language)
+
+
+class SneakersSize(models.Model):
+    class Meta:
+        db_table = 'sneakers_size'
+        verbose_name = _('Розмір')
+        verbose_name_plural = _('Розміри')
+
+    sneakers = models.ForeignKey(Sneaker, related_name='sneakers_size')
+    size = models.SmallIntegerField(verbose_name=_('Розмір'))
+
+    def __str__(self):
+        return '{} | розмір: {}'.format(self.sneakers, self.size)
 
 
 class SneakersPhoto(models.Model):

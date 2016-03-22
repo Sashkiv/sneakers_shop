@@ -1,7 +1,6 @@
 <form id="sneakers-filter-form" action="/sneakers/" method="get" onchange="refresh_sneakers()">
     <a name="top"></a>
     <div id="filters" class="col-lg-3">
-        <span id="filter-text">Виберіть фільтр</span>
             {{ form.as_ul }}
         <div id="size-sneakers">
 
@@ -21,10 +20,14 @@
                     <img src="/media/{{ obj.sneakers_photo.first.image }}" width="300">
                 </div>
                 <div class="title">
-                    {{ obj }} <br/>
+                    Кросівки {{ obj.brand }} {{ obj.model }}
                 </div>
                 <div class="sizes">
+                    {% if obj.sneakers_size.all|length == 1 %}
+                    <span>Розмір</span>
+                    {% elif obj.sneakers_size.all|length > 1 %}
                     <span>Доступні розміри</span>
+                    {% endif %}
                     {%  for size in obj.sneakers_size.all %}
                         <span>{{ size.size }}   </span>
                     {% endfor %}

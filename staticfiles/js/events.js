@@ -26,5 +26,5 @@ function go_to_page(page) {
 function refresh_sneakers() {
     var get_params = $('#sneakers-filter-form').serialize();
     sneakers_params = (get_params === '') ? sneakers_params : get_params;
-    get_sneakers('');
+    get_sneakers();
 }

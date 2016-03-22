@@ -1,6 +1,10 @@
 import os
 
 from django import test
+from test_tools import data_provider, FixtureManager
+
+fx_urls = FixtureManager()
+fx_urls.load(fixture_file='data_urls_filter')
 
 
 class TestSneakersRequests(test.TestCase):
@@ -19,7 +23,8 @@ class TestSneakersRequests(test.TestCase):
         self.assertEquals(r.status_code, 200)
         self.assertTrue(r.content.decode('utf-8').strip('\n'))
 
-    def test_get_sneakers_filter_response_200(self):
-        r = self.client.get('/sneakers/?brand=0&sex=0')
+    @data_provider(fx_urls['urls'])
+    def test_get_sneakers_filter_response_200(self, params):
+        r = self.client.get('/sneakers/?'+params)
         self.assertEquals(r.status_code, 200)
         self.assertTrue(r.content.decode('utf-8').strip('\n'))

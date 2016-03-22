@@ -1,0 +1,11 @@
+{
+  "urls": [
+    ["brand=0"],
+    ["brand=0&brand=1"],
+    ["brand=1&brand=2"],
+    ["brand=0&size=36"],
+    ["gender=0&gender=1"],
+    ["price_from=1200&price_to=2000"],
+    ["gender=0&size=40&price_from=1500&brand=1"]
+  ]
+}

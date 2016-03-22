@@ -2,12 +2,7 @@
     <a name="top"></a>
     <div id="filters" class="col-lg-3">
         <span id="filter-text">Виберіть фільтр</span>
-        <div id="gender-type">
-            {{ form.gender }}
-        </div>
-        <div id="brand-type">
-            {{ form.brand }}
-        </div>
+            {{ form.as_ul }}
         <div id="size-sneakers">
 
         </div>
@@ -17,7 +12,6 @@
         <div id="catalog-head" class="">
             <h3>Каталог</h3>
         </div>
-
 
     {% for obj in object_list %}
         <div class="sneakers">
@@ -37,28 +31,30 @@
                 </div>
             </a>
         </div>
-
     {% endfor %}
     </div>
 </form>
 
-<div class="col-lg-offset-6">
-{% if is_paginated %}
-    <ul class="pagination">
-    {% if page_obj.has_previous %}
-        <li>
-            <span><a href="#top" onclick="go_to_page({{ page_obj.previous_page_number }})">Previous</a></span>
-        </li>
-    {% endif %}
-        <li class="">
-            <span>Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.</span>
-        </li>
-    {% if page_obj.has_next %}
-        <li>
-            <span><a href="#top" onclick="go_to_page({{ page_obj.next_page_number }})">Next</a></span>
-        </li>
-    {% endif %}
-    </ul>
-{% endif %}
+<div class="container">
+    <div class="row">
+        <div class="col-lg-offset-6">
+        {% if is_paginated %}
+            <ul class="pagination">
+            {% if page_obj.has_previous %}
+                <li>
+                    <span><a href="#top" onclick="go_to_page({{ page_obj.previous_page_number }})">Previous</a></span>
+                </li>
+            {% endif %}
+                <li class="">
+                    <span>Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.</span>
+                </li>
+            {% if page_obj.has_next %}
+                <li>
+                    <span><a href="#top" onclick="go_to_page({{ page_obj.next_page_number }})">Next</a></span>
+                </li>
+            {% endif %}
+            </ul>
+        {% endif %}
+        </div>
+    </div>
 </div>
-

@@ -1,5 +1,6 @@
 from django import forms
 from django.db.models import Min, Max
+from django.utils.translation import ugettext_lazy as _
 
 from sneakers_shop.pkg.sneakers.models import Sneaker, Brand, SneakersSize
 
@@ -29,19 +30,30 @@ class SneakersFilterForm(forms.Form):
 
     brand = QuiteModelMultipleChoiceField(
         queryset=Brand.objects.all(),
-        required=False
+        required=False,
+        widget=forms.CheckboxSelectMultiple,
+        label=_('Бренд')
     )
-    gender = forms.ChoiceField(choices=Sneaker.GENDER, required=False)
-    size = forms.IntegerField(required=False)
-    price_from = forms.IntegerField(required=False)
-    price_to = forms.IntegerField(required=False)
+    gender = forms.ChoiceField(
+        choices=Sneaker.GENDER,
+        required=False,
+        label=_('Стать')
+    )
+    size = forms.IntegerField(required=False, label=_('Розмір'))
+    price_from = forms.IntegerField(required=False, label=_('Від ціни'))
+    price_to = forms.IntegerField(required=False, label=_('До ціни'))
 
     def __init__(self, *args, **kwargs):
         super(SneakersFilterForm, self).__init__(*args, **kwargs)
 
         size_range = SneakersSize.objects.aggregate(Min('size'), Max('size'))
-        self.fields['size'].min_value = size_range.get('size__min', 30)
-        self.fields['size'].max_value = size_range.get('size__max', 50)
+        _min = size_range.get('size__min', 30)
+        _max = size_range.get('size__max', 50)
+        self.fields['size'].min_value = _min
+        self.fields['size'].max_value = _max
+        self.fields['size'].widget.attrs.update({'min': _min, 'max': _max})
+        self.fields['price_from'].widget.attrs.update({'step': 100})
+        self.fields['price_to'].widget.attrs.update({'step': 100})
 
     def clean(self):
         cleaned_data = super(SneakersFilterForm, self).clean()

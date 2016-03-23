@@ -7,7 +7,7 @@ from sneakers_shop.pkg.sneakers.forms import SneakersFilterForm
 class SneakersListView(generic.ListView):
 
     queryset = Sneaker.objects.filter(is_ready=True)
-    paginate_by = 9
+    paginate_by = 15
 
     def qs_filter(self, form_cleaned_data):
         brands = form_cleaned_data.get('brand')

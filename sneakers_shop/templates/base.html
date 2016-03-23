@@ -15,6 +15,7 @@
     <link href='https://fonts.googleapis.com/css?family=Droid+Serif' rel='stylesheet' type='text/css'>
     <script src="{% static 'js/jquery-1.12.1.min.js' %}"></script>
     <script src="{% static 'js/events.js' %}"></script>
+    <script src="{% static 'bootstrap-3.3.6/js/bootstrap.min.js' %}"></script>
 </head>
 <body>
 
@@ -32,14 +33,20 @@
             </div>
         </div>
     </div>
-    <nav class="navbar navbar-inverse">
-        <div class="container-fluid">
+    <div class="navbar navbar-inverse" role="navigation">
+        <div class="container">
             <div class="container-fluid">
                 <!-- Brand and toggle get grouped for better mobile display -->
                 <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
                     <a class="navbar-brand" href="/">Sport People</a>
                 </div>
-                <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <div class="navbar-collapse collapse ">
                     <ul class="nav navbar-nav">
                         <li {% if request.path == '/' %} class="active" {% endif %}><a href="/">Головна</a></li>
                         <li {% if request.path == '/catalog/' %} class="active" {% endif %}><a href="/catalog/">Каталог</a></li>
@@ -50,10 +57,16 @@
                 </div>
             </div>
         </div>
-    </nav>
-    <div id="slider">
-
     </div>
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12 hidden-xs">
+                <div id="slider">
+                </div>
+            </div>
+        </div>
+    </div>
+
 </div>
 <div class="content">
     {% block content %}{% endblock %}

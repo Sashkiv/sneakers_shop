@@ -39,7 +39,7 @@ class SneakersFilterForm(forms.Form):
         required=False,
         label=_('Стать')
     )
-    size = forms.IntegerField(required=False, label=_('Розмір'))
+    size = forms.FloatField(required=False, label=_('Розмір'))
     price_from = forms.IntegerField(required=False, label=_('Від ціни'))
     price_to = forms.IntegerField(required=False, label=_('До ціни'))
 
@@ -51,9 +51,24 @@ class SneakersFilterForm(forms.Form):
         _max = size_range.get('size__max', 50)
         self.fields['size'].min_value = _min
         self.fields['size'].max_value = _max
-        self.fields['size'].widget.attrs.update({'min': _min, 'max': _max})
-        self.fields['price_from'].widget.attrs.update({'step': 100})
-        self.fields['price_to'].widget.attrs.update({'step': 100})
+        self.fields['size'].widget.attrs.update({
+            'min': _min,
+            'max': _max,
+            'step': 0.5,
+            'class': 'form-control',
+            'placeholder': _('Виберіть розмір')
+        })
+        self.fields['price_from'].widget.attrs.update({
+            'step': 100,
+            'class': 'form-control',
+            'placeholder': _('Мінімальна ціна')
+        })
+        self.fields['price_to'].widget.attrs.update({
+            'step': 100,
+            'class': 'form-control',
+            'placeholder': _('Максимальна ціна')
+        })
+        self.fields['gender'].widget.attrs.update({'class': 'form-control'})
 
     def clean(self):
         cleaned_data = super(SneakersFilterForm, self).clean()

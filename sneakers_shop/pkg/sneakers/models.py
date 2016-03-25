@@ -88,7 +88,7 @@ class SneakersSize(models.Model):
         verbose_name_plural = _('Розміри')
 
     sneakers = models.ForeignKey(Sneaker, related_name='sneakers_size')
-    size = models.SmallIntegerField(verbose_name=_('Розмір'))
+    size = models.FloatField(verbose_name=_('Розмір'))
 
     def __str__(self):
         return '{} | розмір: {}'.format(self.sneakers, self.size)

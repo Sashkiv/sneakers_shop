@@ -1,0 +1,56 @@
+<form id="sneakers-filter-form" action="/sneakers/" method="get" onchange="refresh_sneakers()">
+    <a name="top"></a>
+    <div id="filters" class="col-lg-3">
+        <div class="form-group">
+            <label for="{{ form.brand.id_for_label }}">{{ form.brand.label }}</label>
+            {{ form.brand }}
+        </div>
+        <div class="form-group">
+            <label for="{{ form.gender.id_for_label }}">{{ form.gender.label }}</label>
+            {{ form.gender }}
+        </div>
+        <div class="form-group">
+            <label for="{{ form.size.id_for_label }}">{{ form.size.label }}</label>
+            {{ form.size }}
+        </div>
+        <div class="form-group">
+            <label for="{{ form.price_from.id_for_label }}">{{ form.price_from.label }}</label>
+            {{ form.price_from }}
+        </div>
+        <div class="form-group">
+            <label for="{{ form.price_to.id_for_label }}">{{ form.price_to.label }}</label>
+            {{ form.price_to }}
+        </div>
+    </div>
+
+    <div id="sneakers-list" class="col-lg-9">
+        <div id="catalog-head" class="">
+            <h3>Каталог</h3>
+        </div>
+        {% include 'sneakers/sneaker_list.html' %}
+    </div>
+</form>
+
+<div class="container">
+    <div class="row">
+        <div class="col-lg-offset-6">
+        {% if is_paginated %}
+            <ul class="pagination">
+            {% if page_obj.has_previous %}
+                <li>
+                    <span><a href="#top" onclick="go_to_page({{ page_obj.previous_page_number }})">Попередня</a></span>
+                </li>
+            {% endif %}
+                <li class="">
+                    <span>Сторінка {{ page_obj.number }} із {{ page_obj.paginator.num_pages }}.</span>
+                </li>
+            {% if page_obj.has_next %}
+                <li>
+                    <span><a href="#top" onclick="go_to_page({{ page_obj.next_page_number }})">Наступна</a></span>
+                </li>
+            {% endif %}
+            </ul>
+        {% endif %}
+        </div>
+    </div>
+</div>

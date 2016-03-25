@@ -4,10 +4,11 @@ from sneakers_shop.pkg.sneakers.models import Sneaker
 from sneakers_shop.pkg.sneakers.forms import SneakersFilterForm
 
 
-class SneakersListView(generic.ListView):
+class SneakersCatalogView(generic.ListView):
 
     queryset = Sneaker.objects.filter(is_ready=True)
     paginate_by = 15
+    template_name = 'sneakers/sneakers_catalog.html'
 
     def qs_filter(self, form_cleaned_data):
         brands = form_cleaned_data.get('brand')
@@ -32,7 +33,7 @@ class SneakersListView(generic.ListView):
     def get_context_data(self, **kwargs):
         kwargs['form'] = self.form
         del self.form
-        return super(SneakersListView, self).get_context_data(**kwargs)
+        return super(SneakersCatalogView, self).get_context_data(**kwargs)
 
     def get(self, request, *args, **kwargs):
 
@@ -40,7 +41,13 @@ class SneakersListView(generic.ListView):
         form.is_valid()
         self.queryset = self.qs_filter(form.clean())
         self.form = form
-        return super(SneakersListView, self).get(request, *args, **kwargs)
+        return super(SneakersCatalogView, self).get(request, *args, **kwargs)
+
+
+class SneakersListView(generic.ListView):
+
+    def get_queryset(self):
+        return Sneaker.objects.filter(is_ready=True)
 
 
 class SneakersDetailView(generic.DetailView):

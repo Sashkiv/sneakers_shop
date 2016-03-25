@@ -3,10 +3,12 @@
  */
 
 var sneakers_url = '/sneakers/';
+var sneakers_list_url = sneakers_url + 'list/';
 var sneakers_params = '';
 
 $(document).ready(function() {
     get_sneakers();
+    get_list_sneakers();
 });
 
 function get_sneakers(params) {
@@ -15,6 +17,12 @@ function get_sneakers(params) {
         url_request += params;
     $.get(url_request, function (response) {
         $('#sneakers').html(response);
+    })
+}
+
+function get_list_sneakers() {
+    $.get(sneakers_list_url, function (response) {
+        $('#sneakers-index').html(response);
     })
 }
 

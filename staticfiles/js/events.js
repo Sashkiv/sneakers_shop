@@ -7,8 +7,13 @@ var sneakers_list_url = sneakers_url + 'list/';
 var sneakers_params = '';
 
 $(document).ready(function() {
-    get_sneakers();
-    get_list_sneakers();
+    if ($('#sneakers').html() !== undefined)
+        get_sneakers();
+    if ($('#sneakers-index').html() !== undefined)
+        get_list_sneakers();
+    $('.carousel').carousel({
+      interval: 6000
+    })
 });
 
 function get_sneakers(params) {
@@ -22,8 +27,19 @@ function get_sneakers(params) {
 
 function get_list_sneakers() {
     $.get(sneakers_list_url, function (response) {
-        $('#sneakers-index').html(response);
-    })
+        var sneakers_index = $('#sneakers-index');
+        var sneakers = $(response).filter('.sneakers');
+        for (var i = 0; i < sneakers.length - 2; i+=3) {
+            var div_item = '<div class="item">'
+                + sneakers[i].outerHTML
+                + sneakers[i+1].outerHTML
+                + sneakers[i+2].outerHTML
+                + '</div>';
+
+            sneakers_index.append(div_item);
+        }
+        $('#sneakers-index > .item').first().addClass('active');
+    });
 }
 
 function go_to_page(page) {

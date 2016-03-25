@@ -36,6 +36,10 @@ div.brand {
     box-shadow: 2px 3px 5px rgba(0, 0, 50, 0.5);
 }
 
+.item .sneakers {
+    margin: 2%;
+}
+
 #id_brand {
     padding-left: 0;
 }
@@ -88,7 +92,7 @@ div.brand {
     text-align: justify;
 }
 
-.texts h1 {
+.texts h1, h3 {
     text-align: center;
 }
 

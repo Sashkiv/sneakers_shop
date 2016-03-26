@@ -2,7 +2,7 @@ from django.contrib import admin
 from django.contrib.auth.models import Group
 
 from sneakers_shop.pkg.sneakers.models import Brand, Sneaker, SneakersPhoto, \
-    SneakersDescription, SneakersSize
+    SneakersDescription, SneakersSize, PromoInfo
 
 
 class SneakersPhotoInlineAdmin(admin.TabularInline):
@@ -35,5 +35,6 @@ class SneakersAdmin(admin.ModelAdmin):
 
 
 admin.site.register(Brand)
+admin.site.register(PromoInfo)
 admin.site.register(Sneaker, SneakersAdmin)
 admin.site.unregister(Group)

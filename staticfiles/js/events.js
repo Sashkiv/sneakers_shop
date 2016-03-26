@@ -3,10 +3,13 @@
  */
 
 var sneakers_url = '/sneakers/';
+var promo_url = '/sneakers/promo_list/';
 var sneakers_list_url = sneakers_url + 'list/';
 var sneakers_params = '';
 
 $(document).ready(function() {
+    get_promo_list();
+
     if ($('#sneakers').html() !== undefined)
         get_sneakers();
     if ($('#sneakers-index').html() !== undefined)
@@ -40,6 +43,14 @@ function get_list_sneakers() {
         }
         $('#sneakers-index > .item').first().addClass('active');
     });
+}
+
+function get_promo_list() {
+    $.get(promo_url, function (response) {
+        $('#promo-slider').html(response);
+        $('#promo-slider > .item').first().addClass('active');
+    })
+
 }
 
 function go_to_page(page) {

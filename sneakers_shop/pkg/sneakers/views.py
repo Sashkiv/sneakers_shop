@@ -1,6 +1,6 @@
 from django.views import generic
 
-from sneakers_shop.pkg.sneakers.models import Sneaker
+from sneakers_shop.pkg.sneakers.models import Sneaker, PromoInfo
 from sneakers_shop.pkg.sneakers.forms import SneakersFilterForm
 
 
@@ -54,3 +54,11 @@ class SneakersDetailView(generic.DetailView):
 
     def get_queryset(self):
         return Sneaker.objects.filter(is_ready=True)
+
+
+class PromoListView(generic.ListView):
+
+    template_name = 'sneakers/promo_list.html'
+
+    def get_queryset(self):
+        return PromoInfo.objects.filter(is_ready=True)

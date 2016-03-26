@@ -1,9 +1,7 @@
-import random
-
 from django.db import models
 from django.utils.translation import ugettext_lazy as _
 
-from sneakers_shop.pkg.sneakers.utils import random_string
+from sneakers_shop.pkg.sneakers.utils import upload_file_to
 
 
 class Brand(models.Model):
@@ -103,14 +101,7 @@ class SneakersPhoto(models.Model):
     DEFAULT_IMG = 'without-photo.jpg'
 
     def upload_path(self, filename):
-        name = random_string(size=12)
-        ext = filename.split('.')[-1]
-        self.filename = "tmp_%s.%s" % (name, ext)
-        url = "sneakers/%s/%s" % (
-            random.randint(1, 25),
-            self.filename
-        )
-        return url
+        return upload_file_to(filename, 'sneakers')
 
     sneakers = models.ForeignKey(Sneaker, verbose_name=_('Кросівки'),
                                  related_name='sneakers_photo', db_index=True)
@@ -120,3 +111,27 @@ class SneakersPhoto(models.Model):
 
     def __str__(self):
         return '{} | photo | {}'.format(self.sneakers, self.pk)
+
+
+class PromoInfo(models.Model):
+    class Meta:
+        db_table = 'sneakers_promo'
+        verbose_name = _('Акція. Оголошення')
+        verbose_name_plural = _('Акції та оголошення')
+
+    DEFAULT_IMG = 'coverages/no-cover.jpg'
+
+    def upload_path(self, filename):
+        return upload_file_to(filename, 'coverages', rand_folder=False)
+
+    title = models.CharField(max_length=127, verbose_name=_('Заголовок'))
+    subtitle = models.CharField(max_length=127, verbose_name=_('Підзаголовок'))
+    url = models.CharField(max_length=127, verbose_name=_('Посилання'))
+    style = models.TextField(max_length=2047, blank=True,
+                             verbose_name=_('Стилі'))
+    image = models.ImageField(upload_to=upload_path, default=DEFAULT_IMG,
+                              verbose_name=_('Фон'))
+    is_ready = models.BooleanField(default=False)
+
+    def __str__(self):
+        return self.title

@@ -1,4 +1,6 @@
 .idea
 media/sneakers/*
+media/coverages/*
+!media/coverages/no-cover.jpg
 static/*
 *.pyc

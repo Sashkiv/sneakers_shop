@@ -28,3 +28,8 @@ class TestSneakersRequests(test.TestCase):
         r = self.client.get('/sneakers/?'+params)
         self.assertEquals(r.status_code, 200)
         self.assertTrue(r.content.decode('utf-8').strip('\n'))
+
+    def test_get_list_promo_response_200(self):
+        r = self.client.get('/sneakers/promo_list/')
+        self.assertEquals(r.status_code, 200)
+        self.assertTrue(r.content.decode('utf-8').strip('\n'))

@@ -1,0 +1,18 @@
+{% for obj in object_list %}
+    <div class="item">
+        <a href="{{ obj.url }}">
+
+            <div class="promo-image">
+                <img src="/media/{{ obj.image }}">
+            </div>
+            <div class="promo-description" style="{% if obj.style %} {{ obj.style }} {% else %} top: 10%; left: 10% {% endif %}">
+                <div class="promo-title">
+                    <h1>{{ obj.title }}</h1>
+                </div>
+                <div class="promo-subtitle">
+                    <h3>{{ obj.subtitle }}</h3>
+                </div>
+            </div>
+        </a>
+    </div>
+{% endfor %}

@@ -118,5 +118,16 @@
       "is_ready": true,
       "image": "without-photo.jpg"
     }
+  },
+  {
+    "pk": 1,
+    "model": "sneakers.promoinfo",
+    "fields": {
+      "title": "Qqwerty",
+      "subtitle": "some str",
+      "url": "/catalog/",
+      "is_ready": true,
+      "image": "coverages/no-cover.jpg"
+    }
   }
 ]

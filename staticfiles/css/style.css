@@ -30,10 +30,25 @@ div.brand {
     display: inline;
 }
 
-#slider {
-    margin: 50px;
-    height: 400px;
+#promo-slider {
+    margin: 50px auto;
+    max-height: 400px;
     box-shadow: 2px 3px 5px rgba(0, 0, 50, 0.5);
+    overflow: hidden;
+    position: relative;
+}
+
+.promo-description {
+    position: absolute;
+    color: black;
+}
+
+#promo-slider a:hover {
+    text-decoration: none;
+}
+
+.promo-image img{
+    width: 100%;
 }
 
 .item .sneakers {

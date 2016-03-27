@@ -58,14 +58,9 @@
             </div>
         </div>
     </div>
-    <div class="col-sm-12 hidden-xs">
-        <div class="carousel slide" id="carousel">
-            <div class="carousel-inner" id="promo-slider">
-
-            </div>
-        </div>
-    </div>
-
+    {% block slider %}
+    {% include 'slider.html' %}
+    {% endblock %}
 </div>
 <div class="content">
     {% block content %}{% endblock %}

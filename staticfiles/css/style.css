@@ -99,6 +99,7 @@ div.brand {
     margin: 50px 0 0 0;
     padding: 50px 0;
     min-height: 300px;
+    overflow: auto;
     background: #f0f0f0;
 }
 
@@ -109,6 +110,29 @@ div.brand {
 
 .texts h1, h3 {
     text-align: center;
+}
+
+#sneakers-detail {
+    display: block;
+}
+
+#detail-info {
+    margin: 50px 0 20px 0;
+}
+
+#detail-img img {
+    width: 100%;
+}
+
+#detail-list-img img {
+    display: inline-block;
+    height: 120px;
+    border: 1px solid #ccc;
+    cursor: pointer;
+}
+
+#detail-list-img img.active {
+    border: 1px solid #f71752;
 }
 
 #footer {

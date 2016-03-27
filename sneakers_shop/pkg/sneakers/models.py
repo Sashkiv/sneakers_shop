@@ -46,6 +46,9 @@ class Sneaker(models.Model):
     def __str__(self):
         return '{} | {}'.format(self.brand, self.model)
 
+    def gender_description(self):
+        return dict(self.GENDER).get(self.gender)
+
 
 class SneakersDescription(models.Model):
     class Meta:

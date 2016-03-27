@@ -1,5 +1,42 @@
 {% extends 'base.html' %}
 
+{% block slider %}
+{% endblock %}
+
 {% block content %}
-{{ object }}
+<div class="col-lg-offset-1 col-lg-10" id="sneakers-detail">
+    <div class="col-lg-12" id="detail-info">
+        <div  class="col-lg-8" id="detail-img">
+            <img src="/media/{{ object.sneakers_photo.first.image }}">
+        </div>
+        <div  class="col-lg-4" id="detail-description">
+            <div class="title">
+                Кросівки {{ object.brand }} {{ object.model }} <br>
+                Ціна: {{ object.price }} грн. <br>
+                Тип: {{ object.gender_description }}
+            </div>
+            <div class="sizes">
+                {% if object.sneakers_size.all|length == 1 %}
+                <span>Розмір</span>
+                {% elif object.sneakers_size.all|length > 1 %}
+                <span>Доступні розміри</span>
+                {% else %}
+                <span>Товар закінчився</span>
+                {% endif %}
+                {%  for size in object.sneakers_size.all %}
+                    <span>{{ size.size }}</span>
+                {% endfor %}
+            </div>
+            <div class="description">
+                {{ object.sneakers_description.first.description }}
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-12" id="detail-list-img">
+        {% for img in object.sneakers_photo.all %}
+            <img src="/media/{{ img.image }}" class="detail-img-small">
+        {% endfor %}
+    </div>
+</div>
+
 {% endblock %}

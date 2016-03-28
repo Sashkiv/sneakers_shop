@@ -125,3 +125,48 @@ STATICFILES_DIRS = (
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = 'media'
+
+
+log_file = '/dev/null' if DEBUG else '/var/log/shop/sneakers_shop.log'
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'filters': {
+        'require_debug_false': {
+            '()': 'django.utils.log.RequireDebugFalse'
+        }
+    },
+    'formatters': {
+        'verbose': {
+            'format': "\n==================== Log entry ====================\n"
+                      "asctime: %(asctime)s\n"
+                      "level  : %(levelname)s\n"
+                      "pid    : %(process)d\n"
+                      "thread : %(thread)d\n"
+                      "message: %(message)s\n",
+            'datefmt': '%Y-%m-%d %H:%M:%S %z',
+        },
+        'simple': {
+            'format': "%(asctime)s %(levelname)s %(message)s\n\n"
+        },
+    },
+    'handlers': {
+        'mail_admins': {
+            'level': 'ERROR',
+            'filters': ['require_debug_false'],
+            'class': 'django.utils.log.AdminEmailHandler'
+        },
+        'logfile': {
+            'class': 'logging.handlers.WatchedFileHandler',
+            'filename': log_file,
+            'formatter': 'verbose',
+        },
+    },
+    'loggers': {
+        'django.request': {
+            'handlers': ['mail_admins', 'logfile'],
+            'level': 'ERROR',
+            'propagate': True,
+        },
+    }
+}

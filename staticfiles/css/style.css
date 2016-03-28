@@ -148,3 +148,28 @@ div.brand {
     margin: 10px 0 10px 40px;
     font-size: 12pt;
 }
+
+.number {
+    margin: 20px;
+    font-size: 36pt;
+}
+
+.contact-info {
+    font-size: 20pt;
+}
+
+.delivery-info {
+    text-align: right;
+}
+
+.about {
+    font-size: 12pt;
+}
+
+.delivery {
+    font-size: 12pt;
+}
+
+.contacts {
+    font-size: 12pt;
+}

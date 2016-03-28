@@ -26,7 +26,7 @@ SECRET_KEY = 'mekdo09765r8+3%j#%pv!&85(*&j&6jw_7$!inq04v_d#d_tf^'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = os.environ.get('IS_DEV_MODE', False)
 
-ALLOWED_HOSTS = ['127.0.0.1', ]
+ALLOWED_HOSTS = ['127.0.0.1', 'sport-people.com.ua', ]
 
 
 # Application definition

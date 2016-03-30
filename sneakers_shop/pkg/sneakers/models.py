@@ -31,11 +31,18 @@ class Sneaker(models.Model):
     )
 
     brand = models.ForeignKey(Brand, verbose_name=_('Бренд'))
-    model = models.CharField(max_length=255, verbose_name=_('Модель'))
+    model = models.CharField(max_length=255, verbose_name=_('Модель'),
+                             blank=True, null=True)
     gender = models.PositiveSmallIntegerField(
-        choices=GENDER, default=MALE, db_index=True, verbose_name=_('Стать')
+        choices=GENDER,
+        default=MALE,
+        db_index=True,
+        verbose_name=_('Стать'),
+        blank=True,
+        null=True
     )
-    price = models.IntegerField(default=0, verbose_name=_('Ціна'))
+    price = models.IntegerField(default=0, verbose_name=_('Ціна'),
+                                blank=True, null=True)
     is_ready = models.BooleanField(verbose_name=_('Опублікувати'))
     date_add = models.DateTimeField(auto_now_add=True,
                                     verbose_name=_('Дата додання'))
@@ -69,7 +76,8 @@ class SneakersDescription(models.Model):
         related_name='sneakers_description',
         verbose_name=_('Кросівки')
     )
-    description = models.TextField(verbose_name=_('Опис'))
+    description = models.TextField(verbose_name=_('Опис'), blank=True,
+                                   null=True)
     language = models.CharField(
         max_length=7,
         choices=LANGUAGES,
@@ -89,7 +97,7 @@ class SneakersSize(models.Model):
         verbose_name_plural = _('Розміри')
 
     sneakers = models.ForeignKey(Sneaker, related_name='sneakers_size')
-    size = models.FloatField(verbose_name=_('Розмір'))
+    size = models.FloatField(verbose_name=_('Розмір'), blank=True, null=True)
 
     def __str__(self):
         return '{} | розмір: {}'.format(self.sneakers, self.size)

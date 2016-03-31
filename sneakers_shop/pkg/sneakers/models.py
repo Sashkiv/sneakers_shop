@@ -56,6 +56,10 @@ class Sneaker(models.Model):
     def gender_description(self):
         return dict(self.GENDER).get(self.gender)
 
+    def first_image(self):
+        return getattr(self.sneakers_photo.filter(is_first=True).first(),
+                       'image', SneakersPhoto.DEFAULT_IMG)
+
 
 class SneakersDescription(models.Model):
     class Meta:
@@ -118,7 +122,7 @@ class SneakersPhoto(models.Model):
                                  related_name='sneakers_photo', db_index=True)
     image = models.ImageField(upload_to=upload_path, default=DEFAULT_IMG,
                               verbose_name=_('Зображення'))
-    is_ready = models.BooleanField(verbose_name=_('Опублікувати'))
+    is_first = models.BooleanField(verbose_name=_('Опублікувати'))
 
     def __str__(self):
         return '{} | photo | {}'.format(self.sneakers, self.pk)
@@ -135,8 +139,10 @@ class PromoInfo(models.Model):
     def upload_path(self, filename):
         return upload_file_to(filename, 'coverages', rand_folder=False)
 
-    title = models.CharField(max_length=127, verbose_name=_('Заголовок'))
-    subtitle = models.CharField(max_length=127, verbose_name=_('Підзаголовок'))
+    title = models.CharField(max_length=127, verbose_name=_('Заголовок'),
+                             blank=True)
+    subtitle = models.CharField(max_length=127, verbose_name=_('Підзаголовок'),
+                                blank=True)
     url = models.CharField(max_length=127, verbose_name=_('Посилання'))
     style = models.TextField(max_length=2047, blank=True,
                              verbose_name=_('Стилі'))

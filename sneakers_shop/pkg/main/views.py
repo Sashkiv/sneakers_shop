@@ -49,4 +49,3 @@ class DeliveryView(generic.TemplateView):
 
 class GoogleVerification(generic.TemplateView):
     template_name = 'google4346c5c573bda2ea.html'
-

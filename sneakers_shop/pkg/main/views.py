@@ -45,3 +45,8 @@ class DeliveryView(generic.TemplateView):
         context = super(DeliveryView, self).get_context_data(**kwargs)
         context['title'] = _("Доставка")
         return context
+
+
+class GoogleVerification(generic.TemplateView):
+    template_name = 'google4346c5c573bda2ea.html'
+

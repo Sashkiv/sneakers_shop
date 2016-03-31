@@ -22,3 +22,8 @@ class TestMainRequests(test.TestCase):
         r = self.client.get('/catalog/')
         self.assertEquals(r.status_code, 200)
         self.assertTrue(r.content.decode('utf-8').strip('\n'))
+
+    def test_google_verification_response_200(self):
+        r = self.client.get('/google4346c5c573bda2ea.html')
+        self.assertEquals(r.status_code, 200)
+        self.assertTrue(r.content.decode('utf-8').strip('\n'))

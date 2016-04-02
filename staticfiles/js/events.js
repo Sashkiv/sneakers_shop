@@ -6,6 +6,8 @@ var sneakers_url = '/sneakers/';
 var promo_url = '/sneakers/promo_list/';
 var sneakers_list_url = sneakers_url + 'list/';
 var sneakers_params = '';
+var sneakers_images = [];
+var current_image_index = 0;
 
 $(document).ready(function() {
     if ($("#promo-slider").html() !== undefined)
@@ -15,7 +17,11 @@ $(document).ready(function() {
     if ($('#sneakers-index').html() !== undefined)
         get_list_sneakers();
     if ($('#sneakers-detail').html() !== undefined)
+    {
         events_for_image_detail();
+        sneakers_images = $('.detail-img-small');
+    }
+
     $('.carousel').carousel({
       interval: 6000
     });
@@ -73,8 +79,32 @@ function events_for_image_detail() {
     var images = $('.detail-img-small');
     images.first().addClass('active');
     $(images).on('click', function () {
-        $('#detail-img').html('<img src='+this.src+'>');
+        $('#detail-img').find('img').attr('src', this.src);
         images.removeClass('active');
         $(this).addClass('active');
-    })
+        for (var i = 0; i < sneakers_images.length; i++)
+            if (sneakers_images[i] == this)
+            {
+                current_image_index = i;
+                break
+            }
+    });
+
+}
+
+function set_current_image(index) {
+    if (index < sneakers_images.length && index >= 0)
+        sneakers_images[index].click();
+}
+
+function next_image() {
+    if (current_image_index < sneakers_images.length - 1)
+        current_image_index++;
+    set_current_image(current_image_index);
+}
+
+function prev_image() {
+    if (current_image_index > 0)
+        current_image_index--;
+    set_current_image(current_image_index);
 }

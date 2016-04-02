@@ -1,4 +1,5 @@
 from django.views import generic
+from django.utils.translation import ugettext_lazy as _
 
 from sneakers_shop.pkg.sneakers.models import Sneaker, PromoInfo
 from sneakers_shop.pkg.sneakers.forms import SneakersFilterForm
@@ -54,6 +55,14 @@ class SneakersDetailView(generic.DetailView):
 
     def get_queryset(self):
         return Sneaker.objects.filter(is_ready=True)
+
+    def get_context_data(self, **kwargs):
+        context = super(SneakersDetailView, self).get_context_data(**kwargs)
+        context['title'] = _("%(unit)s. Інтернет-магазин спортивного "
+                             "оригінального взуття Sport People") % {
+            'unit': self.object
+        }
+        return context
 
 
 class PromoListView(generic.ListView):

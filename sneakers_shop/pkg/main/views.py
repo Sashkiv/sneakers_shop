@@ -7,7 +7,8 @@ class IndexView(generic.TemplateView):
 
     def get_context_data(self, **kwargs):
         context = super(IndexView, self).get_context_data(**kwargs)
-        context['title'] = _("Головна")
+        context['title'] = _("Головна. Інтернет-магазин спортивного "
+                             "оригінального взуття Sport People.")
         return context
 
 
@@ -16,7 +17,8 @@ class ContactsView(generic.TemplateView):
 
     def get_context_data(self, **kwargs):
         context = super(ContactsView, self).get_context_data(**kwargs)
-        context['title'] = _("Контактна інформація")
+        context['title'] = _("Контактна інформація. Інтернет-магазин "
+                             "спортивного оригінального взуття Sport People")
         return context
 
 
@@ -25,7 +27,8 @@ class AboutView(generic.TemplateView):
 
     def get_context_data(self, **kwargs):
         context = super(AboutView, self).get_context_data(**kwargs)
-        context['title'] = _("Про нас")
+        context['title'] = _("Про нас. Інтернет-магазин спортивного "
+                             "оригінального взуття Sport People")
         return context
 
 
@@ -34,7 +37,8 @@ class CatalogView(generic.TemplateView):
 
     def get_context_data(self, **kwargs):
         context = super(CatalogView, self).get_context_data(**kwargs)
-        context['title'] = _("Каталог. Вибери свій товар.")
+        context['title'] = _("Каталог. Вибери свій товар. Інтернет-магазин "
+                             "спортивного оригінального взуття Sport People")
         return context
 
 
@@ -43,7 +47,8 @@ class DeliveryView(generic.TemplateView):
 
     def get_context_data(self, **kwargs):
         context = super(DeliveryView, self).get_context_data(**kwargs)
-        context['title'] = _("Доставка")
+        context['title'] = _("Доставка. Інтернет-магазин спортивного "
+                             "оригінального взуття Sport People")
         return context
 
 

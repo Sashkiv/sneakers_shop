@@ -6,6 +6,9 @@
 {% block content %}
 <div class="col-lg-offset-1 col-lg-10" id="sneakers-detail">
     <div class="col-lg-12" id="detail-info">
+        <div class="title">
+            <h1>Кросівки {{ object.brand }} {{ object.model }} <br></h1>
+        </div>
         <div  class="col-lg-8" id="detail-img">
             <div class="carousel-control left" onclick="prev_image()">
                 <span class="glyphicon glyphicon-chevron-left"></span>
@@ -17,9 +20,8 @@
         </div>
         <div  class="col-lg-4" id="detail-description">
             <div class="title">
-                Кросівки {{ object.brand }} {{ object.model }} <br>
-                Ціна: {{ object.price }} грн. <br>
-                Тип: {{ object.gender_description }}
+                <span class="price">Ціна: {{ object.price }} грн. </span><br>
+                <span>Тип: {{ object.gender_description }}</span>
             </div>
             <div class="sizes">
                 {% if object.sneakers_size.all|length == 1 %}
@@ -36,6 +38,56 @@
             <div class="description">
                 {{ object.sneakers_description.first.description }}
             </div>
+            <br>
+            <button class="btn btn-bitbucket" id="btnShow">Замовити</button>
+            <br>
+            <div id="dialog" style="display: none" align = "center">
+                <form action="/sneakers/{{ object.id }}/order/" method="post" id="order-sneakers">{% csrf_token %}
+                    {{ order_form.non_field_errors }}
+                    <div class="fieldWrapper">
+                        {{ order_form.contact_info.errors }}
+                        <label for="{{ order_form.contact_info.id_for_label }}">
+                            Введіть ваш номер телефону</label>
+                        <br>
+                        {{ order_form.contact_info }}<br>
+                    </div>
+                    <div class="fieldWrapper">
+                        {{ order_form.comment.errors }}
+                        <label for="{{ order_form.comment.id_for_label }}">Ваше повідомлення</label>
+                        {{ order_form.comment }}
+                    </div>
+                    <br>
+                    <input type="button" value="Оформити замовлення" onclick="order()"/>
+                </form>
+                <div id="success" style="display: none">
+                    <img src="/media/ok.png" alt="Success" height="100">
+                    <br>
+                    Ваша заявка успішно оформлена. Найближчим часом з Вами
+                    зв’яжеться наш представник на указаний Вами номер.
+                    <br>
+
+                    <button class="btn" onclick="close_popup()">Close</button>
+                </div>
+                <div id="error" style="display: none">
+                    Невірно введено контактну інформацію. Перевірте правильність вводу.
+                    <br>
+                    <button class="btn" onclick="show_form()">OK</button>
+                </div>
+            </div>
+        <script type="text/javascript">
+            $(function () {
+                $("#dialog").dialog({
+                    modal: true,
+                    autoOpen: false,
+                    title: "Введіть дані, потрібні для замовлення",
+                    width: 450,
+                    height: 350
+                });
+                $("#btnShow").click(function () {
+                    $('#dialog').dialog('open');
+                });
+            });
+        </script>
         </div>
     </div>
     <div class="col-lg-12" id="detail-list-img">

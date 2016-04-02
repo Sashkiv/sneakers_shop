@@ -24,10 +24,12 @@ class Sneaker(models.Model):
 
     MALE = 0x00
     FEMALE = 0x01
+    UNISEX = 0x02
 
     GENDER = (
         (MALE, _('Чоловічі')),
         (FEMALE, _('Жіночі')),
+        (UNISEX, _('Для будь-кого')),
     )
 
     brand = models.ForeignKey(Brand, verbose_name=_('Бренд'))
@@ -152,3 +154,23 @@ class PromoInfo(models.Model):
 
     def __str__(self):
         return self.title
+
+
+class Order(models.Model):
+    class Meta:
+        db_table = 'sneakers_order'
+        verbose_name = _('Замовлення')
+        verbose_name_plural = _('Замовлення')
+
+    sneakers = models.ForeignKey(Sneaker, verbose_name=_('Кросівки'))
+    contact_info = models.CharField(
+        max_length=63,
+        verbose_name=_('Контактна інформація')
+    )
+    comment = models.TextField(max_length=1023, blank=True,
+                               verbose_name=_('Коментар'))
+    date_order = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return "{} | {}".format(self.sneakers,
+                                self.date_order.strftime('%Y-%m-%d %H:%M'))

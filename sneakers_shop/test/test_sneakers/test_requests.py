@@ -33,3 +33,9 @@ class TestSneakersRequests(test.TestCase):
         r = self.client.get('/sneakers/promo_list/')
         self.assertEquals(r.status_code, 200)
         self.assertTrue(r.content.decode('utf-8').strip('\n'))
+
+    def test_make_order_response_201(self):
+        r = self.client.post('/sneakers/1/order/', data={
+            'contact_info': '+380 (98) 765 43 21'
+        })
+        self.assertEquals(r.status_code, 201)

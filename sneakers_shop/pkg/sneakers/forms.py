@@ -2,7 +2,8 @@ from django import forms
 from django.db.models import Min, Max
 from django.utils.translation import ugettext_lazy as _
 
-from sneakers_shop.pkg.sneakers.models import Sneaker, Brand, SneakersSize
+from sneakers_shop.pkg.sneakers.models import Sneaker, Brand, SneakersSize, \
+    Order
 
 
 class QuiteModelMultipleChoiceField(forms.ModelMultipleChoiceField):
@@ -81,3 +82,32 @@ class SneakersFilterForm(forms.Form):
             del cleaned_data[key]
 
         return cleaned_data
+
+
+class OrderForm(forms.ModelForm):
+    class Meta:
+        model = Order
+        fields = ('sneakers', 'contact_info', 'comment', )
+        widgets = {
+            'comment': forms.Textarea(attrs={'cols': 40, 'rows': 5}),
+            'contact_info': forms.TextInput(
+                attrs={
+                    'placeholder': _('+380 98 765 43 21'),
+                    'size': 40,
+                }
+            )
+        }
+
+    def clean_contact_info(self):
+        symbols = ['+', ')', '(', ' ', '.', ',']
+        data = self.cleaned_data.get('contact_info', '')
+        for s in symbols:
+            data = data.replace(s, '')
+        if len(data) < 9:
+            raise forms.ValidationError(_("Неправильний формат номера"))
+        try:
+            int(data)
+        except ValueError:
+            raise forms.ValidationError(_("Неправильний формат номера"))
+
+        return self.cleaned_data.get('contact_info', '')

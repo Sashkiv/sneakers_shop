@@ -1,8 +1,9 @@
 from django.views import generic
+from django.http.response import HttpResponse
 from django.utils.translation import ugettext_lazy as _
 
-from sneakers_shop.pkg.sneakers.models import Sneaker, PromoInfo
-from sneakers_shop.pkg.sneakers.forms import SneakersFilterForm
+from sneakers_shop.pkg.sneakers.models import Sneaker, PromoInfo, Order
+from sneakers_shop.pkg.sneakers.forms import SneakersFilterForm, OrderForm
 
 
 class SneakersCatalogView(generic.ListView):
@@ -62,6 +63,7 @@ class SneakersDetailView(generic.DetailView):
                              "оригінального взуття Sport People") % {
             'unit': self.object
         }
+        context['order_form'] = OrderForm()
         return context
 
 
@@ -71,3 +73,20 @@ class PromoListView(generic.ListView):
 
     def get_queryset(self):
         return PromoInfo.objects.filter(is_ready=True)
+
+
+class OrderView(generic.FormView):
+    form_class = OrderForm
+
+    def post(self, request, *args, **kwargs):
+        form = self.get_form()
+        form.data._mutable = True
+        form.data['sneakers'] = kwargs.get('pk')
+        return super(OrderView, self).post(request, *args, **kwargs)
+
+    def form_valid(self, form):
+        form.save()
+        return HttpResponse(status=201)
+
+    def form_invalid(self, form):
+        return HttpResponse(status=400)

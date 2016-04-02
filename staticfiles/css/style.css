@@ -97,6 +97,11 @@ div.brand {
     font-size: 11pt;
 }
 
+.title .price {
+    font-size: 1.1em;
+    font-weight: 600;
+}
+
 .sizes {
     margin: 10px;
     font-size: 10pt;

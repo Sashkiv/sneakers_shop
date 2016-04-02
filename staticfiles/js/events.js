@@ -108,3 +108,30 @@ function prev_image() {
         current_image_index--;
     set_current_image(current_image_index);
 }
+
+function order() {
+    var url = $('#order-sneakers').attr('action'); // the script where you handle the form input.
+    $.ajax({
+        type: "POST",
+        url: url,
+        data: $("#order-sneakers").serialize(),
+        success: function(data)
+        {
+            $("#order-sneakers").hide();
+            $("#success").show();
+        },
+        error:  function(xhr, str) {
+            $("#order-sneakers").hide();
+            $("#error").show();
+        }
+    });
+}
+
+function show_form() {
+    $("#order-sneakers").show();
+    $("#error").hide();
+}
+
+function close_popup() {
+    $("#dialog").dialog('close');
+}

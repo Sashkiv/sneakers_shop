@@ -39,3 +39,7 @@ class TestSneakersRequests(test.TestCase):
             'contact_info': '+380 (98) 765 43 21'
         })
         self.assertEquals(r.status_code, 201)
+
+    def test_make_order_without_data_response_400(self):
+        r = self.client.post('/sneakers/1/order/')
+        self.assertEquals(r.status_code, 400)

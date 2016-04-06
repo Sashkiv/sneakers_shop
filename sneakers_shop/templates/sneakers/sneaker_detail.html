@@ -54,6 +54,7 @@
                     <div class="fieldWrapper">
                         {{ order_form.comment.errors }}
                         <label for="{{ order_form.comment.id_for_label }}">Ваше повідомлення</label>
+                        <br>
                         {{ order_form.comment }}
                     </div>
                     <br>
@@ -80,7 +81,8 @@
                     modal: true,
                     autoOpen: false,
                     title: "Введіть дані, потрібні для замовлення",
-                    width: 450,
+                    width: 'auto',
+                    maxWidth: 350,
                     height: 350
                 });
                 $("#btnShow").click(function () {

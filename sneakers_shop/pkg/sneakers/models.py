@@ -124,7 +124,7 @@ class SneakersPhoto(models.Model):
                                  related_name='sneakers_photo', db_index=True)
     image = models.ImageField(upload_to=upload_path, default=DEFAULT_IMG,
                               verbose_name=_('Зображення'))
-    is_first = models.BooleanField(verbose_name=_('Опублікувати'))
+    is_first = models.BooleanField(verbose_name=_('Основне зображення'))
 
     def __str__(self):
         return '{} | photo | {}'.format(self.sneakers, self.pk)

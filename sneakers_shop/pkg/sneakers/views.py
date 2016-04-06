@@ -80,8 +80,11 @@ class OrderView(generic.FormView):
 
     def post(self, request, *args, **kwargs):
         form = self.get_form()
-        form.data._mutable = True
-        form.data['sneakers'] = kwargs.get('pk')
+        try:
+            form.data._mutable = True
+            form.data['sneakers'] = kwargs.get('pk')
+        except AttributeError:
+            pass
         return super(OrderView, self).post(request, *args, **kwargs)
 
     def form_valid(self, form):

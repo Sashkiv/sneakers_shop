@@ -55,7 +55,7 @@ class SneakersFilterForm(forms.Form):
         self.fields['size'].widget.attrs.update({
             'min': _min,
             'max': _max,
-            'step': 0.5,
+            'step': 1,
             'class': 'form-control',
             'placeholder': _('Виберіть розмір')
         })
@@ -89,11 +89,11 @@ class OrderForm(forms.ModelForm):
         model = Order
         fields = ('sneakers', 'contact_info', 'comment', )
         widgets = {
-            'comment': forms.Textarea(attrs={'cols': 40, 'rows': 5}),
+            'comment': forms.Textarea(attrs={'cols': 35, 'rows': 5}),
             'contact_info': forms.TextInput(
                 attrs={
                     'placeholder': _('+380 98 765 43 21'),
-                    'size': 40,
+                    'size': 35,
                 }
             )
         }

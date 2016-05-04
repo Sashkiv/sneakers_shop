@@ -161,7 +161,7 @@ class SneakersPhoto(models.Model):
         self.thumbs.save(suf.name+'.jpg', suf, save=False)
 
     def save(self, **kwargs):
-        if self.thumbs or not self.image:
+        if not self.image:
             return super(SneakersPhoto, self).save(**kwargs)
         self.create_thumbs()
         return super(SneakersPhoto, self).save(**kwargs)

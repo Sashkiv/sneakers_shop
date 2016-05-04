@@ -1,5 +1,11 @@
+import os
+from io import StringIO, BytesIO
+
+from PIL import Image
 from django.db import models
 from django.utils.translation import ugettext_lazy as _
+from django.core.files.uploadedfile import SimpleUploadedFile
+from django.conf import settings
 
 from sneakers_shop.pkg.sneakers.utils import upload_file_to
 
@@ -61,6 +67,10 @@ class Sneaker(models.Model):
     def first_image(self):
         return getattr(self.sneakers_photo.filter(is_first=True).first(),
                        'image', SneakersPhoto.DEFAULT_IMG)
+
+    def thumbnails(self):
+        return getattr(self.sneakers_photo.filter(is_first=True).first(),
+                       'thumbs', SneakersPhoto.DEFAULT_IMG)
 
 
 class SneakersDescription(models.Model):
@@ -125,9 +135,36 @@ class SneakersPhoto(models.Model):
     image = models.ImageField(upload_to=upload_path, default=DEFAULT_IMG,
                               verbose_name=_('Зображення'))
     is_first = models.BooleanField(verbose_name=_('Основне зображення'))
+    thumbs = models.ImageField(upload_to=upload_path, default=DEFAULT_IMG,
+                               verbose_name=_('Мініатюра зображення'))
 
     def __str__(self):
         return '{} | photo | {}'.format(self.sneakers, self.pk)
+
+    def create_thumbs(self):
+        image = Image.open(os.path.join(settings.MEDIA_ROOT, self.image.path))
+
+        w, h = image.size
+        THUMBNAIL_SIZE = (int(w*200/h), 200)
+        image.thumbnail(THUMBNAIL_SIZE, Image.ANTIALIAS)
+
+        # Save the thumbnail
+        temp_handle = BytesIO()
+        image.save(temp_handle, 'jpeg')
+        temp_handle.seek(0)
+
+        # Save to the thumbnail field
+        suf = SimpleUploadedFile(
+            os.path.split(self.image.name)[-1], temp_handle.read(),
+            content_type='image/jpeg'
+        )
+        self.thumbs.save(suf.name+'.jpg', suf, save=False)
+
+    def save(self, **kwargs):
+        if self.thumbs or not self.image:
+            return super(SneakersPhoto, self).save(**kwargs)
+        self.create_thumbs()
+        return super(SneakersPhoto, self).save(**kwargs)
 
 
 class PromoInfo(models.Model):

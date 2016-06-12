@@ -170,6 +170,7 @@ class SneakersPhoto(models.Model):
 class PromoInfo(models.Model):
     class Meta:
         db_table = 'sneakers_promo'
+        ordering = ['-modified', ]
         verbose_name = _('Акція. Оголошення')
         verbose_name_plural = _('Акції та оголошення')
 
@@ -188,6 +189,8 @@ class PromoInfo(models.Model):
     image = models.ImageField(upload_to=upload_path, default=DEFAULT_IMG,
                               verbose_name=_('Фон'))
     is_ready = models.BooleanField(default=False)
+    modified = models.DateTimeField(_('Дата останнього оновлення'),
+                                    auto_now=True)
 
     def __str__(self):
         return self.title
